@@ -50,10 +50,13 @@ public class JavaCplusCallActivity extends AppCompatActivity {
 //        jniMethod.getJavaNativeMethod();
 //        jniMethod.returnValueVoid();
 //        AppLog.D("kan:"+jniMethod.a);
-    int value=jniMethod.setObj(new ParamInfoBean(true,'w',122,1112,new byte[]{1,2,3},"kankanni"));
+        double a=18;
 
-    AppLog.D("value:"+value);
+    String b=jniMethod.setObj(new ParamInfoBean(true,'w',a,1112,new Byte("124"),"kankanni"));
+
+    AppLog.D("value:"+b);
 //        boolean boolValue, char charValue, double doubleValue, int intValue, byte[] array, String str
+String str;
 
 
     }

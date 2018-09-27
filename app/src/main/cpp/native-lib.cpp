@@ -4,6 +4,9 @@
 #include <android/log.h>
 
 const char *LOG_TGA = "LOG_TGA";
+//#define LOG_TAG  "C_TAG"
+#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+
 
 extern "C" JNIEXPORT jstring  JNICALL
 Java_com_quliang_myapplicationc1_javanative_JniMethod_stringFromJNI(
@@ -38,17 +41,6 @@ Java_com_quliang_myapplicationc1_javanative_JniMethod_getStringFromNative
     return 10;
 }
 
-extern "C" JNIEXPORT jint JNICALL Java_com_quliang_myapplicationc1_javanative_JniMethod_getJavaField
-        (JNIEnv *env, jobject thiz) {
-
-    jclass clazz = (*env).GetObjectClass(thiz);//获取该对象的类
-    jobject m_object = (*env).NewGlobalRef(thiz);//创建对象的本地变量
-//    m_mid =(*env).GetMethodID(clazz, "notifyFiledChange", "()V");//获取JAVA方法的ID
-    jfieldID m_fid = (*env).GetFieldID(clazz, "a", "I");//获取java变量的ID
-    (*env).SetIntField(m_object, m_fid, 18);
-    return 10;
-}
-
 extern "C" JNIEXPORT jint JNICALL
 Java_com_quliang_myapplicationc1_javanative_JniMethod_getJavaNativeField
         (JNIEnv *env, jobject thiz) {
@@ -69,27 +61,34 @@ Java_com_quliang_myapplicationc1_javanative_JniMethod_getJavaNativeMethod
     jobject m_object = (*env).NewGlobalRef(thiz);//创建对象的本地变量
     jmethodID m_mid = (*env).GetMethodID(clazz, "javaNativeMdCall", "()V");//获取JAVA方法的ID
     (*env).CallVoidMethod(m_object, m_mid);
-    __android_log_print(ANDROID_LOG_DEBUG, LOG_TGA, "getJavaNativeMethod");
+//    __android_log_print(ANDROID_LOG_DEBUG, LOG_TGA, "getJavaNativeMethod");
     return 0;
 }
 
 
-extern "C" JNIEXPORT jint JNICALL Java_com_quliang_myapplicationc1_javanative_JniMethod_setObj
+extern "C" JNIEXPORT jstring JNICALL Java_com_quliang_myapplicationc1_javanative_JniMethod_setObj
         (JNIEnv *env, jobject thiz, jobject paramObj) {
 
     jclass jcInfo = env->FindClass("com/quliang/myapplicationc1/bean/ParamInfoBean");
 
-    jfieldID jfi = env->GetFieldID(jcInfo, "intValue", "I");
-//    paramInfo.intValue = env->GetIntField(paramObj, jfi);
-    int a = env->GetIntField(paramObj, jfi);
+    jfieldID intValue = env->GetFieldID(jcInfo, "intValue", "I");
+    jfieldID boolValue = env->GetFieldID(jcInfo, "boolValue", "Z");
+    jfieldID charValue = env->GetFieldID(jcInfo, "charValue", "C");
+    jfieldID doubleValue = env->GetFieldID(jcInfo, "doubleValue", "D");
+    jfieldID bytew = env->GetFieldID(jcInfo, "bytew", "B");
+    jfieldID str = env->GetFieldID(jcInfo, "str", "Ljava/lang/String;");
 
 
-//    jclass clazz = (*env).GetObjectClass(thiz);//获取该对象的类
-//    jobject m_object = (*env).NewGlobalRef(thiz);//创建对象的本地变量
-//    jmethodID  m_mid =(*env).GetMethodID(clazz, "javaNativeMdCall", "()V");//获取JAVA方法的ID
-//    (*env).CallVoidMethod(m_object,m_mid);
-//    __android_log_print(ANDROID_LOG_DEBUG, LOG_TGA, "getJavaNativeMethod");
-    return a;
+//    return env->GetIntField(paramObj, intValue);
+//    return env->GetBooleanField(paramObj, boolValue);
+//    return env->GetCharField(paramObj, charValue);
+//    return env->GetDoubleField(paramObj, doubleValue);
+//    return env->GetByteField(paramObj, bytew);
+//    return (jstring)env->GetObjectField(paramObj, str);
+
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TGA, "getJavaNativeMethod");
+
+    return (jstring)env->GetObjectField(paramObj, str);
 }
 
 

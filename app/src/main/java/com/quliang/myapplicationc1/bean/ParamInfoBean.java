@@ -9,15 +9,16 @@ public class ParamInfoBean {
     public char charValue;
     public double doubleValue;
     public int intValue;
-    public byte[] array;
+    public byte bytew;
     public String str;
 
-    public ParamInfoBean(boolean boolValue, char charValue, double doubleValue, int intValue, byte[] array, String str) {
+    public ParamInfoBean(boolean boolValue, char charValue, double doubleValue, int intValue, byte array, String str) {
         this.boolValue = boolValue;
         this.charValue = charValue;
         this.doubleValue = doubleValue;
         this.intValue = intValue;
-        this.array = array;
+        this.bytew = array;
         this.str = str;
     }
+
 }

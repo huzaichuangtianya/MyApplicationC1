@@ -18,7 +18,7 @@ public class JniMethod {
     public native int getJavaNativeField();
     public native int getJavaNativeMethod();
     public native void returnValueVoid();
-    public native int setObj(ParamInfoBean paramInfoBean);
+    public native String setObj(ParamInfoBean paramInfoBean);
 
 
     public int a=10;
