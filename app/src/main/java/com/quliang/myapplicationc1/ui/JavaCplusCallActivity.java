@@ -19,16 +19,14 @@ import com.quliang.myapplicationc1.util.AppLog;
 public class JavaCplusCallActivity extends AppCompatActivity {
 
 
-
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    int a=(int)msg.obj;
-                    tv.setText(""+a);
-                    AppLog.D("a:"+a);
+                    int a = (int) msg.obj;
+                    tv.setText("" + a);
+                    AppLog.D("a:" + a);
                     break;
 
             }
@@ -37,28 +35,45 @@ public class JavaCplusCallActivity extends AppCompatActivity {
 
 
     TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_javacpluscall);
-         tv = (TextView) findViewById(R.id.sample_text);
-        JniMethod jniMethod =new JniMethod();
+        tv = (TextView) findViewById(R.id.sample_text);
+
+
+        initData();
+    }
+
+    private void initData(){
+        JniMethod jniMethod = new JniMethod();
 //        tv.setText(""+jniMethod.getStringFromNative());
-        tv.setText(""+jniMethod.sumFromJNI(1220,22));
+        tv.setText("" + jniMethod.sumFromJNI(1220, 22));
 
 //        jniMethod.getJavaNativeField();
 //        jniMethod.getJavaNativeMethod();
 //        jniMethod.returnValueVoid();
 //        AppLog.D("kan:"+jniMethod.a);
-        double a=18;
+//        double a=18;
 
-    String b=jniMethod.setObj(new ParamInfoBean(true,'w',a,1112,new Byte("124"),"kankanni"));
+        byte[] b = new byte[10];
+        for (int i = 0; i < 9; i++) {
+            b[i] = (byte) (i + 97);
+        }
+        ParamInfoBean paramInfoBean = new ParamInfoBean(true, 'w', 18.8, 1112, new Byte("124"), "kankanni");
+        paramInfoBean.setByteArray(b);
 
-    AppLog.D("value:"+b);
-//        boolean boolValue, char charValue, double doubleValue, int intValue, byte[] array, String str
-String str;
+        ParamInfoBean c_paramInfoBean = (ParamInfoBean)jniMethod.setObj(paramInfoBean);
 
+        AppLog.D("c_paramInfoBean.boolValue:" + c_paramInfoBean.boolValue);
+        AppLog.D("c_paramInfoBean.charValue:" + c_paramInfoBean.charValue);
+        AppLog.D("c_paramInfoBean.doubleValue:" + c_paramInfoBean.doubleValue);
+        AppLog.D("c_paramInfoBean.intValue:" + c_paramInfoBean.intValue);
+        AppLog.D("c_paramInfoBean.bytew:" + c_paramInfoBean.bytew);
+        AppLog.D("c_paramInfoBean.str:" + c_paramInfoBean.str);
 
+//        public byte byteArray[];
     }
 
 

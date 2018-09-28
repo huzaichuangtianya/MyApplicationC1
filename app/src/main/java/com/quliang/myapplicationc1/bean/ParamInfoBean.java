@@ -12,6 +12,8 @@ public class ParamInfoBean {
     public byte bytew;
     public String str;
 
+    public byte byteArray[];
+
     public ParamInfoBean(boolean boolValue, char charValue, double doubleValue, int intValue, byte array, String str) {
         this.boolValue = boolValue;
         this.charValue = charValue;
@@ -21,4 +23,12 @@ public class ParamInfoBean {
         this.str = str;
     }
 
+
+    public byte[] getByteArray() {
+        return byteArray;
+    }
+
+    public void setByteArray(byte[] byteArray) {
+        this.byteArray = byteArray;
+    }
 }
